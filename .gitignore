@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Environment Variables
+.env
+
+# Database
+*.db
+*.sqlite3
+
+# ChromaDB
+chroma_data/
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.cursor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Docker
+docker-compose.override.yml
+
+# Testing
+test_uploads/
+test_chroma_data/
+test_studymate.db
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Distribution
+*.tar.gz
+*.whl

@@ -1,0 +1,36 @@
+version: "3.8"
+
+# This is a convenience copy. The canonical docker-compose.yml is in the project root.
+# Usage: cd .. && docker compose up --build
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    container_name: studymate-backend
+    ports:
+      - "8001:8001"
+    env_file:
+      - ../.env
+    volumes:
+      - ../uploads:/app/uploads
+      - ../chroma_data:/app/chroma_data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    container_name: studymate-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
