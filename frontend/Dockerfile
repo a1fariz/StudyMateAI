@@ -1,7 +1,13 @@
+# Stage 1: Build the static assets using Node
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY frontend/package.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
+
+# Stage 2: Serve the compiled static assets using Nginx
 FROM nginx:alpine
-
-# Copy static frontend SPA assets to Nginx default html directory
-COPY frontend/index.html /usr/share/nginx/html/index.html
-COPY frontend/app.js /usr/share/nginx/html/app.js
-
+COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80

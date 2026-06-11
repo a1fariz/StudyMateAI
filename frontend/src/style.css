@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #080a10;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Scrollbars */
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(139, 155, 180, 0.15);
+  border-radius: 9999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 155, 180, 0.3);
+}
+
+/* Glassmorphism Styles */
+.glass-nav {
+  background: rgba(8, 10, 16, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(34, 41, 68, 0.5);
+}
+
+.glass-panel {
+  background: rgba(16, 20, 34, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 41, 68, 0.65);
+}
+
+.glass-card {
+  background: rgba(22, 27, 48, 0.45);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(34, 41, 68, 0.45);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.08);
+  transform: translateY(-2px);
+}
+
+/* 3D Flashcard Styles */
+.perspective-card {
+  perspective: 1000px;
+}
+
+.card-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Glow Elements */
+.glow-blur-1 {
+  filter: blur(140px);
+  animation: floatGlow 10s infinite ease-in-out;
+}
+
+.glow-blur-2 {
+  filter: blur(120px);
+  animation: floatGlow 8s infinite ease-in-out 2s;
+}
+
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(20px, -20px) scale(1.1);
+    opacity: 0.25;
+  }
+}

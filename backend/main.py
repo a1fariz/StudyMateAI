@@ -184,5 +184,7 @@ app.include_router(search.router, prefix="/api/v1")
 app.include_router(chat.router, prefix="/api/v1")
 app.include_router(features.router, prefix="/api/v1")
 
-# Serve frontend static assets (index.html, app.js) at the root
-app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+# Serve frontend static assets (compiled SPA in dist, or raw source in dev) at the root
+frontend_dir = "frontend/dist" if os.path.exists("frontend/dist") else "frontend"
+app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+

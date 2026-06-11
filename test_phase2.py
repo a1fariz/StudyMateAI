@@ -27,7 +27,7 @@ print()
 print("=" * 60)
 print("STEP 2: Login")
 print("=" * 60)
-r = requests.post(f"{BASE}/auth/login", json={
+r = requests.post(f"{BASE}/auth/login", data={
     "username": "phase2user",
     "password": "test123456",
 })

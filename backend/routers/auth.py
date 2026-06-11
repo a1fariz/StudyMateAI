@@ -3,12 +3,13 @@ Authentication router: register, login, get current user, logout.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from backend.database import get_db
 from backend.models.user import User
-from backend.schemas.auth import UserCreate, UserLogin, UserResponse, Token
+from backend.schemas.auth import UserCreate, UserResponse, Token
 from backend.services.auth import (
     hash_password,
     verify_password,
@@ -52,17 +53,17 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/login", response_model=Token)
-async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)):
     """Login and receive a JWT access token."""
     # Find user by username or email
     result = await db.execute(
         select(User).where(
-            (User.username == user_data.username) | (User.email == user_data.username)
+            (User.username == form_data.username) | (User.email == form_data.username)
         )
     )
     user = result.scalar_one_or_none()
 
-    if not user or not verify_password(user_data.password, user.hashed_password):
+    if not user or not verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",

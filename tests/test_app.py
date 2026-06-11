@@ -303,7 +303,7 @@ class TestAuthEndpoints:
             "password": "securepassword123",
         })
         # Login
-        response = await client.post("/api/v1/auth/login", json={
+        response = await client.post("/api/v1/auth/login", data={
             "username": "loginuser",
             "password": "securepassword123",
         })
@@ -318,7 +318,7 @@ class TestAuthEndpoints:
             "username": "wrongpwuser",
             "password": "correctpassword",
         })
-        response = await client.post("/api/v1/auth/login", json={
+        response = await client.post("/api/v1/auth/login", data={
             "username": "wrongpwuser",
             "password": "wrongpassword",
         })
@@ -335,7 +335,7 @@ class TestAuthEndpoints:
             "username": "meuser",
             "password": "securepassword123",
         })
-        login_resp = await client.post("/api/v1/auth/login", json={
+        login_resp = await client.post("/api/v1/auth/login", data={
             "username": "meuser",
             "password": "securepassword123",
         })
@@ -362,7 +362,7 @@ class TestDocumentEndpoints:
             "username": "docuser",
             "password": "securepassword123",
         })
-        resp = await client.post("/api/v1/auth/login", json={
+        resp = await client.post("/api/v1/auth/login", data={
             "username": "docuser",
             "password": "securepassword123",
         })

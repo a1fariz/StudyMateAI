@@ -294,7 +294,9 @@ docker compose logs -f
 | Service | URL | Description |
 |---------|-----|-------------|
 | Backend | `http://localhost:8001` | FastAPI + API |
-| Frontend | `http://localhost:80` | Nginx SPA |
+i| Frontend | `http://localhost:80` | Nginx SPA (proxies `/api/` to backend) |
+
+The frontend container’s nginx config forwards `/api/*` to the backend service, so the SPA can use same-origin API calls when opened at `http://localhost`. For local development without Docker, run uvicorn on port **8001** — FastAPI serves the SPA and API together.
 
 ### Manual Deployment
 

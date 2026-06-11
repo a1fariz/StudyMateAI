@@ -1,111 +1,54 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="dark" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>StudyMate AI — AI-Powered Intelligent Study Platform</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <title>StudyMate AI — Intelligent RAG Study Assistant</title>
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script>
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              colors: {
-                "dark-bg": "#f9f8f6",
-                "panel-bg": "#ffffff",
-                "accent-glow": "#d16b4a",
-                "accent-blue": "#191919",
-                "text-primary": "#191919",
-                "text-muted": "#706e6b",
-                "outline-glow": "rgba(209, 107, 74, 0.15)"
-              },
-              fontFamily: {
-                sans: ["Inter", "sans-serif"]
-              }
-            }
-          }
-        }
-    </script>
-    <style>
-        body {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #f9f8f6;
-        }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid #e5e0d8;
-            box-shadow: 0 4px 24px rgba(25, 25, 25, 0.02);
-        }
-        .neon-border-hover:hover {
-            border-color: rgba(209, 107, 74, 0.5);
-            box-shadow: 0 0 20px rgba(209, 107, 74, 0.15);
-        }
-        /* Custom scrollbar for chat stream */
-        .chat-scroll::-webkit-scrollbar {
-            width: 6px;
-        }
-        .chat-scroll::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .chat-scroll::-webkit-scrollbar-thumb {
-            background: rgba(112, 110, 107, 0.2);
-            border-radius: 3px;
-        }
-        .chat-scroll::-webkit-scrollbar-thumb:hover {
-            background: rgba(112, 110, 107, 0.35);
-            border-radius: 3px;
-        }
-        /* Flashcard 3D flip styling */
-        .perspective-card {
-            perspective: 1000px;
-        }
-        .card-inner {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        .card-flipped {
-            transform: rotateY(180deg);
-        }
-        .card-front, .card-back {
-            backface-visibility: hidden;
-        }
-        .card-back {
-            transform: rotateY(180deg);
-        }
-    </style>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/src/style.css"/>
 </head>
-<body class="font-sans text-text-primary overflow-x-hidden">
+<body class="bg-brand-dark text-slate-200 overflow-x-hidden font-sans">
+
+    <!-- Ambient background glows -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-indigo-600/10 rounded-full glow-blur-1"></div>
+        <div class="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full glow-blur-2"></div>
+    </div>
 
     <!-- ────────────────────────────────────── -->
     <!-- LANDING PAGE VIEW (shown by default) -->
     <!-- ────────────────────────────────────── -->
-    <div id="landing-view" class="block w-full">
+    <div id="landing-view" class="block w-full min-h-screen relative z-10">
         <!-- TopNavBar -->
-        <nav class="fixed top-0 w-full z-40 border-b border-black/5 bg-dark-bg/85 backdrop-blur-xl transition-all shadow-sm">
-            <div class="max-w-[1280px] mx-auto px-6 h-20 flex justify-between items-center">
+        <nav class="fixed top-0 w-full z-40 glass-nav">
+            <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
                 <!-- Brand -->
-                <a class="text-xl font-bold tracking-tighter text-text-primary flex items-center space-x-2" href="#">
-                    <span class="material-symbols-outlined text-accent-glow text-2xl">school</span>
-                    <span>StudyMate AI</span>
+                <a class="text-xl font-display font-bold text-white flex items-center space-x-2.5 tracking-tight" href="#">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-600/35">
+                        <span class="material-symbols-outlined text-white text-xl">school</span>
+                    </div>
+                    <span>StudyMate <span class="text-indigo-400">AI</span></span>
                 </a>
+                
                 <!-- Links -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a class="text-sm text-text-muted hover:text-text-primary transition-colors" href="#features">Features</a>
-                    <a class="text-sm text-text-muted hover:text-text-primary transition-colors" href="#docs">Developers</a>
-                    <a class="text-sm text-text-muted hover:text-text-primary transition-colors" href="#architecture">Architecture</a>
+                    <a class="text-xs font-semibold uppercase tracking-wider text-brand-textMuted hover:text-white transition-colors" href="#features">Features</a>
+                    <a class="text-xs font-semibold uppercase tracking-wider text-brand-textMuted hover:text-white transition-colors" href="#architecture">How it works</a>
                 </div>
+                
                 <!-- Auth Actions -->
                 <div class="flex items-center space-x-4">
-                    <button onclick="openAuthModal('login')" class="text-sm font-medium text-text-muted hover:text-text-primary transition-colors">
+                    <button onclick="openAuthModal('login')" class="text-xs font-bold uppercase tracking-wider text-brand-textMuted hover:text-white transition-colors py-2 px-3">
                         Sign In
                     </button>
-                    <button onclick="openAuthModal('register')" class="bg-accent-blue hover:bg-accent-glow text-white text-xs font-semibold px-5 py-2.5 rounded-full transition-all active:scale-95 duration-200">
+                    <button onclick="openAuthModal('register')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-full transition-all active:scale-95 shadow-lg shadow-indigo-600/20">
                         Launch App
                     </button>
                 </div>
@@ -113,89 +56,91 @@
         </nav>
 
         <!-- Hero Section -->
-        <main class="pt-32 pb-24">
-            <section class="max-w-[1280px] mx-auto px-6 flex flex-col items-center text-center mt-12 mb-20">
+        <main class="pt-36 pb-24">
+            <section class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center mt-12 mb-20">
                 <!-- Top Badge -->
-                <div class="inline-flex items-center space-x-2 bg-panel-bg/60 px-4 py-2 rounded-full mb-8 border border-black/10">
-                    <span class="bg-accent-glow text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full">RAG AI</span>
-                    <span class="text-xs font-medium text-text-primary">StudyMate AI v1.0.0 is running live</span>
-                    <span class="material-symbols-outlined text-sm text-text-muted">arrow_forward</span>
+                <div class="inline-flex items-center space-x-2 bg-brand-panel/60 px-4 py-2 rounded-full mb-8 border border-brand-border/60">
+                    <span class="bg-indigo-600 text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full">FastAPI + RAG</span>
+                    <span class="text-xs font-medium text-slate-300">Intelligent learning environment online</span>
                 </div>
                 <!-- Hero Heading -->
-                <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-text-primary max-w-[900px] mb-8 leading-[1.05]">
-                    Master your studies with <span class="bg-gradient-to-r from-accent-blue to-accent-glow bg-clip-text text-transparent">AI Intelligence</span>
+                <h1 class="text-5xl md:text-7xl font-display font-extrabold text-white max-w-[900px] mb-8 leading-[1.1] tracking-tight">
+                    Master any textbook with <br/>
+                    <span class="bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-500 bg-clip-text text-transparent">AI Study Intelligence</span>
                 </h1>
-                <p class="text-base md:text-lg text-text-muted max-w-[620px] mb-12">
-                    Upload your textbooks, lecture notes, or reference materials. Instantly ask questions with verifiable citations, generate practice exams, and create study plans.
+                <p class="text-base md:text-lg text-brand-textMuted max-w-[620px] mb-12 leading-relaxed">
+                    Upload your books or study guides. Instantly ask questions with grounded page citations, generate interactive practice exams, study plans, and flashcards.
                 </p>
                 <!-- Hero Actions -->
-                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-20">
-                    <button onclick="openAuthModal('register')" class="bg-accent-glow hover:opacity-90 text-white font-semibold px-8 py-4 rounded-full transition-opacity w-full sm:w-auto active:scale-95">
+                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-20 w-full justify-center">
+                    <button onclick="openAuthModal('register')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-8 py-4 rounded-full transition-all w-full sm:w-auto active:scale-95 shadow-lg shadow-indigo-600/25">
                         Get Started Free
                     </button>
-                    <a href="#features" class="border border-black/10 hover:bg-black/5 text-text-primary font-semibold px-8 py-4 rounded-full transition-colors w-full sm:w-auto text-center">
-                        Explore Platform
+                    <a href="#features" class="border border-brand-border hover:bg-white/5 text-white font-bold text-sm px-8 py-4 rounded-full transition-colors w-full sm:w-auto text-center">
+                        Explore Features
                     </a>
                 </div>
 
-                <!-- Hero Demo Graphic -->
-                <div class="w-full max-w-[1024px] bg-panel-bg/30 border border-black/10 rounded-2xl p-3 shadow-2xl relative overflow-hidden">
-                    <div class="aspect-[16/9] w-full rounded-xl bg-panel-bg border border-black/5 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
-                        <!-- Gold/Grey ambient circles -->
-                        <div class="absolute -top-40 -left-40 w-96 h-96 bg-accent-glow/10 rounded-full blur-[120px]"></div>
-                        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-black/5 rounded-full blur-[120px]"></div>
+                <!-- Hero Demo Mockup -->
+                <div class="w-full max-w-[1024px] bg-brand-panel/40 border border-brand-border/80 rounded-2xl p-3 shadow-2xl relative overflow-hidden backdrop-blur-md">
+                    <div class="aspect-[16/9] w-full rounded-xl bg-brand-dark/95 border border-brand-border/50 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+                        <!-- Ambient circles inside mockup -->
+                        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px]"></div>
+                        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px]"></div>
                         
-                        <span class="material-symbols-outlined text-7xl text-accent-glow mb-6 animate-pulse">query_stats</span>
-                        <h3 class="text-2xl font-bold mb-3">Intelligent Retrieval-Augmented Generation</h3>
-                        <p class="text-text-muted max-w-[500px] text-sm leading-relaxed mb-6">
-                            StudyMate AI segments, embeds, and indexes your PDFs into vector representations. It retrieves grounded source context dynamically to answer questions.
+                        <div class="w-16 h-16 rounded-2xl bg-indigo-600/15 border border-indigo-500/20 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-4xl text-indigo-400">psychology</span>
+                        </div>
+                        <h3 class="text-2xl font-display font-bold text-white mb-3">Intelligent RAG Pipeline</h3>
+                        <p class="text-brand-textMuted max-w-[500px] text-xs leading-relaxed mb-6">
+                            StudyMate AI splits, embeds, and indexes your PDFs into ChromaDB. It retrieves semantic context dynamically to answers queries, avoiding hallucinations.
                         </p>
-                        <div class="flex items-center space-x-2 text-xs text-text-muted">
-                            <span class="bg-black/5 px-3 py-1.5 rounded-full border border-black/5">Chroma Vector Store</span>
-                            <span class="bg-black/5 px-3 py-1.5 rounded-full border border-black/5">all-MiniLM-L6-v2 Embeddings</span>
-                            <span class="bg-black/5 px-3 py-1.5 rounded-full border border-black/5">Gemini 2.0 Flash</span>
+                        <div class="flex flex-wrap items-center justify-center gap-2 text-[10px] uppercase font-bold tracking-wider text-indigo-300">
+                            <span class="bg-brand-panel border border-brand-border px-3 py-1.5 rounded-full">ChromaDB</span>
+                            <span class="bg-brand-panel border border-brand-border px-3 py-1.5 rounded-full">MiniLM Embeddings</span>
+                            <span class="bg-brand-panel border border-brand-border px-3 py-1.5 rounded-full">Gemini 2.0 Flash</span>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Features Grid Section -->
-            <section id="features" class="max-w-[1280px] mx-auto px-6 py-20 border-t border-black/5">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Core Platform Capabilities</h2>
-                    <p class="text-text-muted max-w-[550px] mx-auto text-sm">
-                        Everything you need to digest massive textbooks, practice concepts, and master exams in half the time.
+            <section id="features" class="max-w-7xl mx-auto px-6 py-24 border-t border-brand-border/30">
+                <div class="text-center mb-20">
+                    <h2 class="text-3xl md:text-4xl font-display font-extrabold text-white mb-4">Core Platform Capabilities</h2>
+                    <p class="text-brand-textMuted max-w-[550px] mx-auto text-xs leading-relaxed">
+                        Features designed to help you digest vast materials, study concepts, and pass examinations with half the effort.
                     </p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Feature 1 -->
-                    <div class="glass-panel rounded-[24px] p-6 hover:border-accent-glow/50 transition-all duration-300 group flex flex-col h-full text-center">
-                        <div class="mb-6 bg-black/[0.03] w-20 h-20 rounded-full flex items-center justify-center relative mx-auto">
-                            <span class="material-symbols-outlined text-3xl text-accent-glow">chat</span>
+                    <div class="glass-card rounded-[24px] p-8 flex flex-col h-full text-center">
+                        <div class="mb-6 bg-indigo-600/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto border border-indigo-500/20">
+                            <span class="material-symbols-outlined text-2xl text-indigo-400">chat_bubble</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Grounded Document Q&A</h3>
-                        <p class="text-text-muted text-xs leading-relaxed mb-4 flex-grow">
-                            Ask complex questions and receive precise answers generated strictly from your uploaded PDFs, complete with highlighted page citations.
+                        <h3 class="text-lg font-display font-bold text-white mb-3">Grounded Q&A</h3>
+                        <p class="text-brand-textMuted text-xs leading-relaxed">
+                            Ask specific questions and receive verified answers built strictly from your uploaded PDFs, complete with source page references.
                         </p>
                     </div>
                     <!-- Feature 2 -->
-                    <div class="glass-panel rounded-[24px] p-6 hover:border-accent-glow/50 transition-all duration-300 group flex flex-col h-full text-center">
-                        <div class="mb-6 bg-black/[0.03] w-20 h-20 rounded-full flex items-center justify-center relative mx-auto">
-                            <span class="material-symbols-outlined text-3xl text-accent-glow">quiz</span>
+                    <div class="glass-card rounded-[24px] p-8 flex flex-col h-full text-center">
+                        <div class="mb-6 bg-purple-600/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto border border-purple-500/20">
+                            <span class="material-symbols-outlined text-2xl text-purple-400">quiz</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Quiz Generator</h3>
-                        <p class="text-text-muted text-xs leading-relaxed mb-4 flex-grow">
-                            Instantly convert any chapter or book into an interactive practice quiz with multiple choice questions, score grading, and instant explanations.
+                        <h3 class="text-lg font-display font-bold text-white mb-3">Quiz Generator</h3>
+                        <p class="text-brand-textMuted text-xs leading-relaxed">
+                            Instantly transform chapters or books into interactive MCQ quizzes with score evaluation and complete explanations.
                         </p>
                     </div>
                     <!-- Feature 3 -->
-                    <div class="glass-panel rounded-[24px] p-6 hover:border-accent-glow/50 transition-all duration-300 group flex flex-col h-full text-center">
-                        <div class="mb-6 bg-black/[0.03] w-20 h-20 rounded-full flex items-center justify-center relative mx-auto">
-                            <span class="material-symbols-outlined text-3xl text-accent-glow">library_books</span>
+                    <div class="glass-card rounded-[24px] p-8 flex flex-col h-full text-center">
+                        <div class="mb-6 bg-teal-600/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto border border-teal-500/20">
+                            <span class="material-symbols-outlined text-2xl text-teal-400">import_contacts</span>
                         </div>
-                        <h3 class="text-xl font-bold mb-2">Smart Summaries</h3>
-                        <p class="text-text-muted text-xs leading-relaxed mb-4 flex-grow">
-                            Extract key points and structural outlines from documents. Export your summaries into stylized, downloadable PDF reports.
+                        <h3 class="text-lg font-display font-bold text-white mb-3">Smart Summaries</h3>
+                        <p class="text-brand-textMuted text-xs leading-relaxed">
+                            Extract structural keypoints from complex textbooks. Export and download your summaries as formatted PDF reports.
                         </p>
                     </div>
                 </div>
@@ -203,13 +148,13 @@
         </main>
 
         <!-- Footer -->
-        <footer class="border-t border-black/5 bg-panel-bg/20 py-12">
-            <div class="max-w-[1280px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <div class="text-xs text-text-muted">
+        <footer class="border-t border-brand-border/30 bg-brand-panel/30 py-12 relative z-10">
+            <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <div class="text-xs text-brand-textMuted">
                     © 2026 StudyMate AI. Engineered for intelligent learning.
                 </div>
-                <div class="text-xs text-text-muted">
-                    Powered by FastAPI, ChromaDB, and Google Gemini
+                <div class="text-xs text-brand-textMuted">
+                    FastAPI • ChromaDB • Google Gemini
                 </div>
             </div>
         </footer>
@@ -219,52 +164,52 @@
     <!-- ────────────────────────────────────── -->
     <!-- AUTHENTICATION OVERLAY MODALS          -->
     <!-- ────────────────────────────────────── -->
-    <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/60 backdrop-blur-md">
-        <div class="glass-panel w-full max-w-[420px] rounded-3xl p-8 relative">
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-brand-dark/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-[420px] rounded-3xl p-8 relative shadow-2xl">
             <!-- Close Button -->
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-text-muted hover:text-text-primary">
+            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-brand-textMuted hover:text-white transition-colors">
                 <span class="material-symbols-outlined">close</span>
             </button>
 
             <!-- Tabs header -->
-            <div class="flex space-x-4 border-b border-black/10 pb-4 mb-6">
-                <button id="tab-login-btn" onclick="switchAuthTab('login')" class="text-lg font-bold border-b-2 border-accent-glow pb-2 focus:outline-none">Sign In</button>
-                <button id="tab-register-btn" onclick="switchAuthTab('register')" class="text-lg font-bold text-text-muted pb-2 focus:outline-none">Register</button>
+            <div class="flex space-x-6 border-b border-brand-border pb-4 mb-6">
+                <button id="tab-login-btn" onclick="switchAuthTab('login')" class="text-lg font-bold border-b-2 border-indigo-500 pb-2 focus:outline-none text-white">Sign In</button>
+                <button id="tab-register-btn" onclick="switchAuthTab('register')" class="text-lg font-bold text-brand-textMuted pb-2 focus:outline-none hover:text-white">Register</button>
             </div>
 
             <!-- Error Banner -->
-            <div id="auth-error" class="hidden bg-[#fcf0f0] border border-[#ecd5d5] text-[#9c3a3a] text-xs p-3.5 rounded-2xl mb-4"></div>
+            <div id="auth-error" class="hidden bg-rose-950/30 border border-rose-500/20 text-rose-300 text-xs p-3.5 rounded-2xl mb-4"></div>
 
             <!-- Login Form -->
-            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="block space-y-4">
+            <form id="login-form" class="block space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-text-muted mb-2" for="login-username">Username or Email</label>
-                    <input class="w-full bg-black/[0.03] border border-black/10 rounded-2xl px-4 py-3 text-sm focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary" id="login-username" required type="text"/>
+                    <label class="block text-xs font-semibold text-brand-textMuted mb-2" for="login-username">Username or Email</label>
+                    <input class="w-full bg-white/5 border border-brand-border rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 focus:ring-0 focus:outline-none text-white placeholder-slate-500 transition-colors" id="login-username" required type="text" placeholder="Enter your username"/>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-text-muted mb-2" for="login-password">Password</label>
-                    <input class="w-full bg-black/[0.03] border border-black/10 rounded-2xl px-4 py-3 text-sm focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary" id="login-password" required type="password"/>
+                    <label class="block text-xs font-semibold text-brand-textMuted mb-2" for="login-password">Password</label>
+                    <input class="w-full bg-white/5 border border-brand-border rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 focus:ring-0 focus:outline-none text-white placeholder-slate-500 transition-colors" id="login-password" required type="password" placeholder="Enter your password"/>
                 </div>
-                <button type="submit" class="w-full bg-accent-glow text-white text-sm font-semibold py-3.5 rounded-2xl hover:opacity-90 active:scale-95 transition-all mt-6">
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-2xl active:scale-95 transition-all mt-6 shadow-lg shadow-indigo-600/10">
                     Sign In
                 </button>
             </form>
 
             <!-- Register Form -->
-            <form id="register-form" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-4">
+            <form id="register-form" class="hidden space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-text-muted mb-2" for="reg-email">Email Address</label>
-                    <input class="w-full bg-black/[0.03] border border-black/10 rounded-2xl px-4 py-3 text-sm focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary" id="reg-email" required type="email"/>
+                    <label class="block text-xs font-semibold text-brand-textMuted mb-2" for="reg-email">Email Address</label>
+                    <input class="w-full bg-white/5 border border-brand-border rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 focus:ring-0 focus:outline-none text-white placeholder-slate-500 transition-colors" id="reg-email" required type="email" placeholder="you@example.com"/>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-text-muted mb-2" for="reg-username">Username</label>
-                    <input class="w-full bg-black/[0.03] border border-black/10 rounded-2xl px-4 py-3 text-sm focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary" id="reg-username" required type="text"/>
+                    <label class="block text-xs font-semibold text-brand-textMuted mb-2" for="reg-username">Username</label>
+                    <input class="w-full bg-white/5 border border-brand-border rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 focus:ring-0 focus:outline-none text-white placeholder-slate-500 transition-colors" id="reg-username" required type="text" placeholder="Create username"/>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-text-muted mb-2" for="reg-password">Password</label>
-                    <input class="w-full bg-black/[0.03] border border-black/10 rounded-2xl px-4 py-3 text-sm focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary" id="reg-password" required type="password"/>
+                    <label class="block text-xs font-semibold text-brand-textMuted mb-2" for="reg-password">Password</label>
+                    <input class="w-full bg-white/5 border border-brand-border rounded-2xl px-4 py-3 text-sm focus:border-indigo-500 focus:ring-0 focus:outline-none text-white placeholder-slate-500 transition-colors" id="reg-password" required type="password" placeholder="Min. 8 characters"/>
                 </div>
-                <button type="submit" class="w-full bg-accent-blue text-white text-sm font-semibold py-3.5 rounded-2xl hover:opacity-90 active:scale-95 transition-all mt-6">
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-3.5 rounded-2xl active:scale-95 transition-all mt-6 shadow-lg shadow-indigo-600/10">
                     Create Account
                 </button>
             </form>
@@ -275,82 +220,87 @@
     <!-- ────────────────────────────────────── -->
     <!-- WORKSPACE DASHBOARD VIEW (hidden default)-->
     <!-- ────────────────────────────────────── -->
-    <div id="workspace-view" class="hidden min-h-screen w-full flex bg-dark-bg">
+    <div id="workspace-view" class="hidden min-h-screen w-full flex bg-brand-dark relative z-10">
         <!-- Sidebar -->
-        <aside class="w-[320px] shrink-0 border-r border-black/5 bg-[#f5f2eb]/90 flex flex-col h-screen sticky top-0 overflow-y-auto">
-            <!-- User Profile and Logout -->
-            <div class="p-6 border-b border-black/5 flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-9 h-9 rounded-full bg-accent-glow/20 border border-accent-glow/30 flex items-center justify-center font-bold text-accent-glow">
+        <aside class="w-[320px] shrink-0 border-r border-brand-border bg-brand-panel flex flex-col h-screen sticky top-0 overflow-y-auto custom-scroll">
+            <!-- User Profile & Logout -->
+            <div class="p-6 border-b border-brand-border flex items-center justify-between">
+                <div class="flex items-center space-x-3 min-w-0">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center font-bold text-indigo-400 text-sm">
                         <span id="user-avatar-initial">U</span>
                     </div>
-                    <div class="text-sm font-semibold text-text-primary truncate max-w-[140px]" id="user-display-name">Username</div>
+                    <div class="text-sm font-semibold text-white truncate max-w-[150px]" id="user-display-name">Username</div>
                 </div>
-                <button onclick="handleLogout()" class="text-text-muted hover:text-red-400 p-1" title="Logout">
-                    <span class="material-symbols-outlined text-xl">logout</span>
+                <button onclick="handleLogout()" class="text-brand-textMuted hover:text-rose-400 p-1.5 rounded-lg hover:bg-white/5 transition-all" title="Logout">
+                    <span class="material-symbols-outlined text-lg">logout</span>
                 </button>
             </div>
 
             <!-- PDF Upload Dropzone -->
-            <div class="p-6 border-b border-black/5">
-                <h4 class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-4">Upload PDF</h4>
-                <div class="border border-dashed border-black/10 hover:border-accent-glow/50 rounded-2xl p-6 text-center cursor-pointer transition-colors relative" id="upload-zone">
+            <div class="p-6 border-b border-brand-border">
+                <h4 class="text-[10px] font-bold uppercase tracking-wider text-brand-textMuted mb-3">Upload PDF Material</h4>
+                <div class="border border-dashed border-brand-border hover:border-indigo-500/70 rounded-2xl p-6 text-center cursor-pointer transition-all bg-brand-card/25" id="upload-zone">
                     <input type="file" id="file-input" class="hidden" accept=".pdf" onchange="handleFileSelect(event)"/>
-                    <span class="material-symbols-outlined text-3xl text-accent-glow mb-2">upload_file</span>
-                    <p class="text-xs text-text-primary font-medium" id="upload-label">Drag & drop PDF here</p>
-                    <p class="text-[10px] text-text-muted mt-1">Maximum 200MB</p>
+                    <span class="material-symbols-outlined text-3xl text-indigo-400 mb-2">upload_file</span>
+                    <p class="text-xs text-slate-300 font-semibold" id="upload-label">Drag & drop PDF here</p>
+                    <p class="text-[10px] text-brand-textMuted mt-1">Up to 200MB limit</p>
                 </div>
-                <!-- Upload / Process Status Banner -->
+                <!-- Upload status banner -->
                 <div id="status-banner" class="hidden mt-3 p-3 rounded-2xl text-[11px] border"></div>
             </div>
 
             <!-- Document Scope Selector -->
-            <div class="p-6 border-b border-black/5">
-                <h4 class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-3">Document Context</h4>
-                <select id="doc-context-select" onchange="handleDocSelectionChange()" class="w-full bg-black/[0.03] border border-black/10 rounded-2xl px-3 py-2.5 text-xs focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary">
-                    <option value="all">🌐 All Documents</option>
-                </select>
+            <div class="p-6 border-b border-brand-border">
+                <h4 class="text-[10px] font-bold uppercase tracking-wider text-brand-textMuted mb-3.5">Document Scope Context</h4>
+                <div class="relative">
+                    <select id="doc-context-select" onchange="handleDocSelectionChange()" class="w-full bg-brand-card border border-brand-border rounded-2xl px-3.5 py-3 text-xs focus:border-indigo-500 focus:ring-0 focus:outline-none text-slate-200 appearance-none cursor-pointer">
+                        <option value="all">🌐 All Documents</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-brand-textMuted">
+                        <span class="material-symbols-outlined text-sm">unfold_more</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Chat History -->
             <div class="p-6 flex-grow flex flex-col min-h-0">
                 <div class="flex items-center justify-between mb-4">
-                    <h4 class="text-xs font-semibold uppercase tracking-wider text-text-muted">Chat History</h4>
-                    <button onclick="startNewChat()" class="text-xs text-accent-glow hover:text-text-primary font-medium flex items-center space-x-1">
+                    <h4 class="text-[10px] font-bold uppercase tracking-wider text-brand-textMuted">Conversations</h4>
+                    <button onclick="startNewChat()" class="text-[11px] text-indigo-400 hover:text-indigo-300 font-bold flex items-center space-x-1" title="New conversation">
                         <span class="material-symbols-outlined text-sm">add</span>
-                        <span>New Chat</span>
+                        <span>New</span>
                     </button>
                 </div>
                 <!-- History Stream -->
-                <div class="flex-grow overflow-y-auto space-y-2 pr-1 chat-scroll" id="history-container">
-                    <!-- Loaded dynamically -->
+                <div class="flex-grow overflow-y-auto space-y-2 pr-1 custom-scroll" id="history-container">
+                    <!-- Dynamically populated -->
                 </div>
             </div>
         </aside>
 
         <!-- Main Workspace Area -->
-        <main class="flex-grow flex flex-col h-screen min-w-0">
+        <main class="flex-grow flex flex-col h-screen min-w-0 bg-brand-dark/95">
             <!-- Tabs Navigation Header -->
-            <header class="h-20 border-b border-black/5 bg-panel-bg/25 px-8 flex items-center justify-between shrink-0">
-                <div class="flex space-x-2">
-                    <button onclick="switchWorkspaceTab('chat')" id="tab-chat" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center space-x-2 bg-accent-glow text-white shadow-lg">
-                        <span class="material-symbols-outlined text-lg">chat</span>
+            <header class="h-20 border-b border-brand-border bg-brand-panel/40 px-8 flex items-center justify-between shrink-0">
+                <div class="flex space-x-2.5">
+                    <button onclick="switchWorkspaceTab('chat')" id="tab-chat" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-2 bg-indigo-600 text-white shadow-lg shadow-indigo-600/25">
+                        <span class="material-symbols-outlined text-base">chat_bubble</span>
                         <span>Chat Assistant</span>
                     </button>
-                    <button onclick="switchWorkspaceTab('summarizer')" id="tab-summarizer" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center space-x-2 text-text-muted hover:text-text-primary">
-                        <span class="material-symbols-outlined text-lg">description</span>
+                    <button onclick="switchWorkspaceTab('summarizer')" id="tab-summarizer" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-2 text-brand-textMuted hover:text-white">
+                        <span class="material-symbols-outlined text-base">description</span>
                         <span>Summarizer</span>
                     </button>
-                    <button onclick="switchWorkspaceTab('quiz')" id="tab-quiz" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center space-x-2 text-text-muted hover:text-text-primary">
-                        <span class="material-symbols-outlined text-lg">quiz</span>
-                        <span>Quiz Generator</span>
+                    <button onclick="switchWorkspaceTab('quiz')" id="tab-quiz" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-2 text-brand-textMuted hover:text-white">
+                        <span class="material-symbols-outlined text-base">quiz</span>
+                        <span>Quiz Studio</span>
                     </button>
-                    <button onclick="switchWorkspaceTab('flashcards')" id="tab-flashcards" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center space-x-2 text-text-muted hover:text-text-primary">
-                        <span class="material-symbols-outlined text-lg">style</span>
+                    <button onclick="switchWorkspaceTab('flashcards')" id="tab-flashcards" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-2 text-brand-textMuted hover:text-white">
+                        <span class="material-symbols-outlined text-base">style</span>
                         <span>Flashcards</span>
                     </button>
-                    <button onclick="switchWorkspaceTab('plan')" id="tab-plan" class="px-5 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center space-x-2 text-text-muted hover:text-text-primary">
-                        <span class="material-symbols-outlined text-lg">calendar_today</span>
+                    <button onclick="switchWorkspaceTab('plan')" id="tab-plan" class="px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all flex items-center space-x-2 text-brand-textMuted hover:text-white">
+                        <span class="material-symbols-outlined text-base">calendar_today</span>
                         <span>Study Plan</span>
                     </button>
                 </div>
@@ -362,33 +312,34 @@
                 <!-- TAB 1: Chat Assistant -->
                 <div id="content-chat" class="block h-full flex flex-col">
                     <!-- Message Stream -->
-                    <div id="chat-messages-container" class="flex-grow overflow-y-auto space-y-4 pr-2 pb-6 chat-scroll">
-                        <!-- Welcome message shown inside JavaScript if empty -->
+                    <div id="chat-messages-container" class="flex-grow overflow-y-auto space-y-4 pr-2 pb-6 custom-scroll">
+                        <!-- Loaded dynamically via js -->
                     </div>
 
                     <!-- Input Bar -->
-                    <form onsubmit="handleChatSubmit(event)" class="mt-4 shrink-0 flex items-center bg-panel-bg border border-black/10 rounded-2xl p-2.5 focus-within:border-accent-glow transition-all">
-                        <input type="text" id="chat-input" placeholder="Ask a question about your study documents..." required class="flex-grow bg-transparent border-0 ring-0 focus:ring-0 focus:outline-none px-4 text-sm text-text-primary placeholder-text-muted"/>
-                        <button type="submit" class="bg-accent-glow hover:opacity-90 w-11 h-11 rounded-full flex items-center justify-center active:scale-95 transition-all text-white">
+                    <form id="chat-form-el" class="mt-4 shrink-0 flex items-center bg-brand-card/80 border border-brand-border/80 rounded-2xl p-2.5 focus-within:border-indigo-500/80 transition-colors shadow-lg">
+                        <input type="text" id="chat-input" placeholder="Ask a question about your study documents..." required class="flex-grow bg-transparent border-0 ring-0 focus:ring-0 focus:outline-none px-4 text-sm text-slate-100 placeholder-slate-500"/>
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 w-11 h-11 rounded-full flex items-center justify-center active:scale-95 transition-all text-white shrink-0 shadow-md shadow-indigo-600/10">
                             <span class="material-symbols-outlined">send</span>
                         </button>
                     </form>
                 </div>
 
                 <!-- TAB 2: Summarizer -->
-                <div id="content-summarizer" class="hidden h-full overflow-y-auto space-y-6">
-                    <div id="summary-warning" class="hidden bg-[#fbf4eb] border border-[#f0dfcc] text-[#8c4d2b] p-4 rounded-2xl text-xs">
-                        ⚠️ Please select a specific document in the sidebar to generate summaries.
+                <div id="content-summarizer" class="hidden h-full overflow-y-auto space-y-6 custom-scroll">
+                    <div id="summary-warning" class="hidden bg-amber-950/20 border border-amber-500/20 text-amber-300 p-4 rounded-2xl text-xs flex items-center space-x-2">
+                        <span class="material-symbols-outlined">warning</span>
+                        <span>Please select a specific document in the sidebar to generate summaries.</span>
                     </div>
                     <div id="summary-box" class="block space-y-6">
-                        <div class="flex justify-between items-center border-b border-black/5 pb-4">
+                        <div class="flex justify-between items-center border-b border-brand-border/40 pb-5">
                             <div>
-                                <h2 class="text-2xl font-bold" id="summary-title">Summary Title</h2>
-                                <p class="text-xs text-text-muted mt-1">Generated taking structural keypoints into account</p>
+                                <h2 class="text-2xl font-display font-bold text-white" id="summary-title">Summary Title</h2>
+                                <p class="text-xs text-brand-textMuted mt-1">Keypoints compiled using structured RAG outlines.</p>
                             </div>
-                            <button onclick="downloadSummaryPDF()" class="bg-accent-blue hover:bg-accent-glow px-5 py-2.5 rounded-full text-xs font-semibold text-white flex items-center space-x-2 transition-all">
+                            <button onclick="downloadSummaryPDF()" class="bg-indigo-600 hover:bg-indigo-500 px-5 py-3 rounded-full text-xs font-bold uppercase tracking-wider text-white flex items-center space-x-2 transition-colors active:scale-95 shadow-md shadow-indigo-600/10">
                                 <span class="material-symbols-outlined text-sm">download</span>
-                                <span>Download PDF Summary</span>
+                                <span>Download PDF</span>
                             </button>
                         </div>
                         <div class="space-y-4" id="summary-points-container">
@@ -398,31 +349,36 @@
                 </div>
 
                 <!-- TAB 3: Quiz Generator -->
-                <div id="content-quiz" class="hidden h-full overflow-y-auto space-y-6">
-                    <div id="quiz-warning" class="hidden bg-[#fbf4eb] border border-[#f0dfcc] text-[#8c4d2b] p-4 rounded-2xl text-xs">
-                        ⚠️ Please select a specific document in the sidebar to generate practice quizzes.
+                <div id="content-quiz" class="hidden h-full overflow-y-auto space-y-6 custom-scroll">
+                    <div id="quiz-warning" class="hidden bg-amber-950/20 border border-amber-500/20 text-amber-300 p-4 rounded-2xl text-xs flex items-center space-x-2">
+                        <span class="material-symbols-outlined">warning</span>
+                        <span>Please select a specific document in the sidebar to generate quizzes.</span>
                     </div>
+                    
                     <!-- Config Box -->
-                    <div id="quiz-config-box" class="glass-panel rounded-3xl p-8 max-w-[500px] mx-auto text-center space-y-6 mt-10">
-                        <span class="material-symbols-outlined text-5xl text-accent-glow">quiz</span>
-                        <h3 class="text-xl font-bold">Generate Practice Quiz</h3>
-                        <p class="text-text-muted text-xs">Choose the length of your practice test. Questions are dynamically compiled based on your PDF contents.</p>
-                        <div class="flex items-center justify-center space-x-4">
-                            <label class="text-xs font-semibold text-text-muted">Questions count:</label>
-                            <input type="number" id="quiz-count-input" value="10" min="5" max="20" class="w-20 bg-black/[0.03] border border-black/10 rounded-2xl px-3 py-2 text-center text-sm focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary"/>
+                    <div id="quiz-config-box" class="bg-brand-card/50 border border-brand-border/60 rounded-3xl p-8 max-w-[500px] mx-auto text-center space-y-6 mt-12 shadow-xl">
+                        <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mx-auto">
+                            <span class="material-symbols-outlined text-3xl text-indigo-400">quiz</span>
                         </div>
-                        <button onclick="triggerQuizGeneration()" class="w-full bg-accent-glow text-white text-xs font-semibold py-3.5 rounded-full hover:opacity-90 active:scale-95 transition-all">
+                        <h3 class="text-xl font-display font-bold text-white">Generate Practice Quiz</h3>
+                        <p class="text-brand-textMuted text-xs leading-relaxed">Choose the length of your practice test. Questions are dynamically compiled based on your PDF contents.</p>
+                        <div class="flex items-center justify-center space-x-4 py-2">
+                            <label class="text-xs font-semibold text-brand-textMuted">Questions count:</label>
+                            <input type="number" id="quiz-count-input" value="10" min="5" max="20" class="w-20 bg-white/5 border border-brand-border rounded-2xl px-3 py-2 text-center text-sm focus:border-indigo-500 focus:ring-0 focus:outline-none text-white"/>
+                        </div>
+                        <button onclick="triggerQuizGeneration()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-full hover:opacity-90 active:scale-95 transition-all">
                             Create Practice Quiz
                         </button>
                     </div>
+                    
                     <!-- Active Quiz Box -->
                     <div id="quiz-active-box" class="hidden space-y-8 pb-10">
-                        <div class="flex justify-between items-center border-b border-black/5 pb-4">
+                        <div class="flex justify-between items-center border-b border-brand-border/40 pb-5">
                             <div>
-                                <h2 class="text-2xl font-bold">Practice Quiz Studio</h2>
-                                <p class="text-xs text-text-muted mt-1">Review the document concepts below.</p>
+                                <h2 class="text-2xl font-display font-bold text-white">Practice Quiz Studio</h2>
+                                <p class="text-xs text-brand-textMuted mt-1">Review the document concepts below.</p>
                             </div>
-                            <button onclick="resetQuiz()" class="border border-black/10 hover:bg-black/5 px-4 py-2 rounded-full text-xs font-semibold text-text-primary transition-all">
+                            <button onclick="resetQuiz()" class="border border-brand-border hover:bg-white/5 px-4 py-2.5 rounded-full text-xs font-semibold text-slate-300 transition-colors">
                                 Reset Quiz
                             </button>
                         </div>
@@ -430,92 +386,102 @@
                             <!-- Questions render dynamically -->
                         </div>
                         <!-- Score Display -->
-                        <div id="quiz-score-display" class="hidden p-6 glass-panel rounded-3xl text-center max-w-[400px] mx-auto space-y-3">
-                            <span class="material-symbols-outlined text-4xl text-green-400">emoji_events</span>
-                            <h4 class="text-lg font-bold">Quiz Complete!</h4>
-                            <p class="text-2xl font-black text-text-primary" id="quiz-score-metric">0 / 0</p>
+                        <div id="quiz-score-display" class="hidden p-6 bg-brand-card border border-brand-border/60 rounded-3xl text-center max-w-[400px] mx-auto space-y-3 shadow-lg">
+                            <span class="material-symbols-outlined text-4xl text-emerald-400">emoji_events</span>
+                            <h4 class="text-lg font-bold text-white">Quiz Complete!</h4>
+                            <p class="text-2xl font-extrabold text-indigo-400" id="quiz-score-metric">0 / 0</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- TAB 4: Flashcards -->
-                <div id="content-flashcards" class="hidden h-full overflow-y-auto space-y-6">
-                    <div id="flashcards-warning" class="hidden bg-[#fbf4eb] border border-[#f0dfcc] text-[#8c4d2b] p-4 rounded-2xl text-xs">
-                        ⚠️ Please select a specific document in the sidebar to generate flashcards.
+                <div id="content-flashcards" class="hidden h-full overflow-y-auto space-y-6 custom-scroll">
+                    <div id="flashcards-warning" class="hidden bg-amber-950/20 border border-amber-500/20 text-amber-300 p-4 rounded-2xl text-xs flex items-center space-x-2">
+                        <span class="material-symbols-outlined">warning</span>
+                        <span>Please select a specific document in the sidebar to generate flashcards.</span>
                     </div>
+                    
                     <!-- Generate Button -->
-                    <div id="flashcards-config-box" class="glass-panel rounded-3xl p-8 max-w-[500px] mx-auto text-center space-y-6 mt-10">
-                        <span class="material-symbols-outlined text-5xl text-accent-glow">style</span>
-                        <h3 class="text-xl font-bold">Generate Study Flashcards</h3>
-                        <p class="text-text-muted text-xs">Create an interactive deck of flashcards from the text concepts.</p>
-                        <button onclick="triggerFlashcardGeneration()" class="w-full bg-accent-glow text-white text-xs font-semibold py-3.5 rounded-full hover:opacity-90 active:scale-95 transition-all">
+                    <div id="flashcards-config-box" class="bg-brand-card/50 border border-brand-border/60 rounded-3xl p-8 max-w-[500px] mx-auto text-center space-y-6 mt-12 shadow-xl">
+                        <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mx-auto">
+                            <span class="material-symbols-outlined text-3xl text-indigo-400">style</span>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white">Generate Study Flashcards</h3>
+                        <p class="text-brand-textMuted text-xs leading-relaxed">Create an interactive deck of flashcards from the text concepts.</p>
+                        <button onclick="triggerFlashcardGeneration()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-full hover:opacity-90 active:scale-95 transition-all">
                             Create Card Deck
                         </button>
                     </div>
+                    
                     <!-- Flashcard Interactive Box -->
                     <div id="flashcards-active-box" class="hidden max-w-[500px] mx-auto flex flex-col items-center space-y-6 mt-6">
-                        <div class="w-full flex justify-between items-center text-xs text-text-muted">
-                            <span id="flashcard-counter">Card 1 of 10</span>
-                            <button onclick="resetFlashcards()" class="hover:text-text-primary underline">Reset Deck</button>
+                        <div class="w-full flex justify-between items-center text-xs text-brand-textMuted">
+                            <span id="flashcard-counter" class="font-semibold">Card 1 of 10</span>
+                            <button onclick="resetFlashcards()" class="hover:text-white underline transition-colors">Reset Deck</button>
                         </div>
                         
                         <!-- 3D Card -->
                         <div class="w-full perspective-card h-[260px] cursor-pointer" onclick="flipFlashcard()">
                             <div id="flashcard-inner" class="card-inner w-full h-full relative rounded-3xl shadow-xl">
                                 <!-- Front Face -->
-                                <div class="card-front absolute inset-0 glass-panel rounded-3xl p-8 flex flex-col justify-center text-center border-accent-glow/20 bg-gradient-to-br from-white to-[#fbf9f4]">
-                                    <span class="text-[10px] text-accent-glow font-bold uppercase tracking-widest mb-3">❓ Question</span>
-                                    <p class="text-lg font-medium" id="flashcard-question-text">Question loading...</p>
+                                <div class="card-front absolute inset-0 bg-brand-card border border-brand-border/80 rounded-3xl p-8 flex flex-col justify-center text-center">
+                                    <span class="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mb-3">❓ Question</span>
+                                    <p class="text-base font-semibold leading-relaxed text-slate-100" id="flashcard-question-text">Question loading...</p>
                                 </div>
                                 <!-- Back Face -->
-                                <div class="card-back absolute inset-0 glass-panel rounded-3xl p-8 flex flex-col justify-center text-center border-accent-blue/20 bg-gradient-to-br from-white to-[#f5f1e8]">
-                                    <span class="text-[10px] text-accent-glow font-bold uppercase tracking-widest mb-3">💡 Answer</span>
-                                    <p class="text-lg font-medium text-accent-glow" id="flashcard-answer-text">Answer loading...</p>
+                                <div class="card-back absolute inset-0 bg-indigo-950/20 border border-indigo-500/40 rounded-3xl p-8 flex flex-col justify-center text-center backdrop-blur-md">
+                                    <span class="text-[10px] text-brand-accentGlow font-bold uppercase tracking-widest mb-3">💡 Answer</span>
+                                    <p class="text-base font-semibold leading-relaxed text-indigo-200" id="flashcard-answer-text">Answer loading...</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Card Controls -->
                         <div class="w-full grid grid-cols-3 gap-4">
-                            <button onclick="prevFlashcard()" id="flashcard-prev-btn" class="bg-black/[0.03] hover:bg-black/5 border border-black/10 py-3 rounded-full text-xs font-semibold active:scale-95 transition-all text-text-primary">
-                                ◀️ Previous
+                            <button onclick="prevFlashcard()" id="flashcard-prev-btn" class="bg-white/5 hover:bg-white/10 border border-brand-border py-3 rounded-full text-xs font-bold uppercase tracking-wider active:scale-95 transition-all text-slate-300">
+                                Prev
                             </button>
-                            <button onclick="flipFlashcard()" class="bg-accent-blue hover:opacity-90 py-3 rounded-full text-xs font-semibold active:scale-95 transition-all text-white">
-                                🔄 Flip Card
+                            <button onclick="flipFlashcard()" class="bg-indigo-600 hover:bg-indigo-500 py-3 rounded-full text-xs font-bold uppercase tracking-wider active:scale-95 transition-all text-white">
+                                Flip
                             </button>
-                            <button onclick="nextFlashcard()" id="flashcard-next-btn" class="bg-black/[0.03] hover:bg-black/5 border border-black/10 py-3 rounded-full text-xs font-semibold active:scale-95 transition-all text-text-primary">
-                                Next ▶️
+                            <button onclick="nextFlashcard()" id="flashcard-next-btn" class="bg-white/5 hover:bg-white/10 border border-brand-border py-3 rounded-full text-xs font-bold uppercase tracking-wider active:scale-95 transition-all text-slate-300">
+                                Next
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- TAB 5: Study Plan -->
-                <div id="content-plan" class="hidden h-full overflow-y-auto space-y-6">
-                    <div id="plan-warning" class="hidden bg-[#fbf4eb] border border-[#f0dfcc] text-[#8c4d2b] p-4 rounded-2xl text-xs">
-                        ⚠️ Please select a specific document in the sidebar to generate a study plan.
+                <div id="content-plan" class="hidden h-full overflow-y-auto space-y-6 custom-scroll">
+                    <div id="plan-warning" class="hidden bg-amber-950/20 border border-amber-500/20 text-amber-300 p-4 rounded-2xl text-xs flex items-center space-x-2">
+                        <span class="material-symbols-outlined">warning</span>
+                        <span>Please select a specific document in the sidebar to generate a study plan.</span>
                     </div>
+                    
                     <!-- Config Box -->
-                    <div id="plan-config-box" class="glass-panel rounded-3xl p-8 max-w-[500px] mx-auto text-center space-y-6 mt-10">
-                        <span class="material-symbols-outlined text-5xl text-accent-glow">calendar_today</span>
-                        <h3 class="text-xl font-bold">Generate Custom Study Plan</h3>
-                        <p class="text-text-muted text-xs">Create a day-by-day plan mapping the document's sections over a defined duration.</p>
-                        <div class="flex items-center justify-center space-x-4">
-                            <label class="text-xs font-semibold text-text-muted">Duration (days):</label>
-                            <input type="number" id="plan-days-input" value="7" min="3" max="14" class="w-20 bg-black/[0.03] border border-black/10 rounded-2xl px-3 py-2 text-center text-sm focus:border-accent-glow focus:ring-0 focus:outline-none text-text-primary"/>
+                    <div id="plan-config-box" class="bg-brand-card/50 border border-brand-border/60 rounded-3xl p-8 max-w-[500px] mx-auto text-center space-y-6 mt-12 shadow-xl">
+                        <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mx-auto">
+                            <span class="material-symbols-outlined text-3xl text-indigo-400">calendar_today</span>
                         </div>
-                        <button onclick="triggerPlanGeneration()" class="w-full bg-accent-glow text-white text-xs font-semibold py-3.5 rounded-full hover:opacity-90 active:scale-95 transition-all">
+                        <h3 class="text-xl font-display font-bold text-white">Generate Study Plan</h3>
+                        <p class="text-brand-textMuted text-xs leading-relaxed">Create a day-by-day plan mapping the document's sections over a defined duration.</p>
+                        <div class="flex items-center justify-center space-x-4 py-2">
+                            <label class="text-xs font-semibold text-brand-textMuted">Duration (days):</label>
+                            <input type="number" id="plan-days-input" value="7" min="3" max="14" class="w-20 bg-white/5 border border-brand-border rounded-2xl px-3 py-2 text-center text-sm focus:border-indigo-500 focus:ring-0 focus:outline-none text-white"/>
+                        </div>
+                        <button onclick="triggerPlanGeneration()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-full hover:opacity-90 active:scale-95 transition-all">
                             Create Plan
                         </button>
                     </div>
+                    
                     <!-- Active Plan -->
                     <div id="plan-active-box" class="hidden space-y-6 pb-10">
-                        <div class="flex justify-between items-center border-b border-black/5 pb-4">
+                        <div class="flex justify-between items-center border-b border-brand-border/40 pb-5">
                             <div>
-                                <h2 class="text-2xl font-bold">Your Custom Schedule</h2>
-                                <p class="text-xs text-text-muted mt-1">Completing daily tasks builds concept mastery.</p>
+                                <h2 class="text-2xl font-display font-bold text-white">Your Custom Schedule</h2>
+                                <p class="text-xs text-brand-textMuted mt-1">Completing daily tasks builds concept mastery.</p>
                             </div>
-                            <button onclick="resetPlan()" class="border border-black/10 hover:bg-black/5 px-4 py-2 rounded-full text-xs font-semibold text-text-primary transition-all">
+                            <button onclick="resetPlan()" class="border border-brand-border hover:bg-white/5 px-4 py-2.5 rounded-full text-xs font-semibold text-slate-300 transition-colors">
                                 Reset Schedule
                             </button>
                         </div>
@@ -529,7 +495,7 @@
         </main>
     </div>
 
-    <!-- Scripts -->
-    <script src="app.js"></script>
+    <!-- Script Bundler Entry -->
+    <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
