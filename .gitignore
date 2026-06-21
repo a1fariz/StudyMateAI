@@ -60,3 +60,6 @@ htmlcov/
 # Node
 node_modules/
 
+# Superpowers brainstorming mockups
+.superpowers/
+
