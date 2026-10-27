@@ -136,8 +136,8 @@ StudyMate-AI/
 ### 1. Clone & Setup
 
 ```bash
-git clone https://github.com/yourusername/StudyMate-AI.git
-cd StudyMate-AI
+git clone https://github.com/a1fariz/StudyMateAI.git
+cd StudyMateAI
 
 # Create virtual environment
 python -m venv venv
@@ -352,3 +352,11 @@ Built as a portfolio project demonstrating:
 - 🎨 **Frontend Development** — Modern SPA with TailwindCSS glassmorphism
 - 🐳 **DevOps** — Docker, CI/CD, rate limiting, security hardening
 - 🧪 **Testing** — pytest + pytest-asyncio comprehensive test suite
+
+## Verification scope
+
+See the Testing section for reproducible checks and GitHub Actions for individual run results. Generated answers and study materials may contain mistakes; page citations help readers inspect the original document. A configured pipeline does not by itself establish deployment availability or answer accuracy.
+
+---
+
+[Portfolio Alfa Rizi](https://alfarizi.my.id) · [GitHub profile](https://github.com/a1fariz) · [Contact](mailto:alfarizi.developer@gmail.com)
