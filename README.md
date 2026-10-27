@@ -38,9 +38,9 @@
 | ❓ **Quiz Generator** | AI-generated MCQ practice exams with scoring | ✅ |
 | 🃏 **Flashcard Generator** | Interactive 3D flip flashcards | ✅ |
 | 📅 **Study Plan Generator** | Day-by-day study schedules | ✅ |
-| 🛡️ **Rate Limiting & Security** | Token-bucket rate limiter + security headers | ✅ |
+| 🛡️ **Rate Limiting & Security** | In-memory per-IP sliding-window rate limiter + security headers | ✅ |
 | 🐳 **Docker Ready** | Full Docker Compose deployment | ✅ |
-| 🧪 **CI/CD Pipeline** | GitHub Actions: lint, test, build, audit | ✅ |
+| 🧪 **CI Checks** | GitHub Actions: lint, test, build, audit | ✅ |
 
 ---
 
@@ -58,7 +58,7 @@
 | **Auth** | python-jose + bcrypt | JWT tokens + password hashing |
 | **PDF Export** | ReportLab | Summary report generation |
 | **Deployment** | Docker + Nginx | Containerized production setup |
-| **CI/CD** | GitHub Actions | Automated testing & builds |
+| **CI checks** | GitHub Actions | Automated testing & builds |
 
 ---
 
@@ -115,7 +115,7 @@ StudyMate-AI/
 │   └── architecture.md            # System architecture & API reference
 │
 ├── .github/workflows/
-│   └── ci.yml                     # GitHub Actions CI/CD pipeline
+│   └── ci.yml                     # GitHub Actions CI workflow
 │
 ├── docker-compose.yml             # Full stack deployment
 ├── requirements.txt               # Python dependencies
@@ -330,7 +330,7 @@ uvicorn backend.main:app --host 0.0.0.0 --port 8001 --workers 4
 | **Phase 2** | Chunking + Embeddings + ChromaDB | ✅ Complete |
 | **Phase 3** | Gemini Integration + RAG Chat + History | ✅ Complete |
 | **Phase 4** | Summary, Quiz, Flashcard, Study Plan | ✅ Complete |
-| **Phase 5** | Docker, Tests, CI/CD, Security, Polish | ✅ Complete |
+| **Phase 5** | Docker, Tests, CI, Security, Polish | ✅ Complete |
 
 ---
 
@@ -350,7 +350,7 @@ Built as a portfolio project demonstrating:
 - 🤖 **RAG Architecture** — Retrieval-Augmented Generation pipeline
 - 🧠 **LLM Integration** — Google Gemini 2.0 Flash with structured output
 - 🎨 **Frontend Development** — Modern SPA with TailwindCSS glassmorphism
-- 🐳 **DevOps** — Docker, CI/CD, rate limiting, security hardening
+- 🐳 **DevOps** — Docker, CI checks, rate limiting, security hardening
 - 🧪 **Testing** — pytest + pytest-asyncio comprehensive test suite
 
 ## Verification scope
